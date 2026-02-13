@@ -39,3 +39,47 @@
 #     print(f"{remainder} is the remainder")
 #     number_one = number_second
 #     number_second=remainder
+
+# # # Write a program to print whether a number is even or odd, also take input from the user.
+# number_one = int(input("Enter a number: "))
+# if number_one % 2 == 0:
+#     print(number_one,"is even")
+# else:
+#     print(number_one,"is odd")
+
+# # # Take name as input and print a greeting message for that particular name.
+# name = input("Input your name: ")
+# if name != '':
+#     print(f"Hi how are you {name} !")
+
+# # # Write a program to input principal, time, and rate (P, T, R) from the user and find Simple Interest.
+# principle, time, rate = map(int, input("Kindly Enter your Inputs: ").split())
+# simpleInterest = principle*time*rate / 100
+# print(simpleInterest)
+
+# # # Take 2 numbers as input and print the largest number.
+# one, second = map(int, input("Enter the Numbers").split(','))
+# if one >second:
+#     print(f'{one} > {second}')
+# else:
+#     print(f'{second} > {one}')
+
+# # # Input currency in rupees and output in USD.
+# pkr = float(input("Enter the Amount in pkr: "))
+# exchangerate = 281
+# print(f"{pkr:.2f} pkr is equal to {pkr/exchangerate:.2f} usd")
+
+# # # Take in two numbers and an operator (+, -, *, /) and calculate the value. (Use if conditions)
+# first_Number, second_Number = map(int, input("Enter Numbers: ").split(','))
+# operator = input('Enter the operator: ')
+# if operator == '+':
+#     print(f"{first_Number + second_Number}")
+# elif operator == '-':
+#     print(f"{first_Number - second_Number}")
+# elif operator == '*':
+#     print(f"{first_Number * second_Number}")
+# elif operator == '/':
+#     print(f"{first_Number / second_Number}")
+# else:
+#     print('Invalid operator')
+
