@@ -83,3 +83,30 @@ elif operator == '/':
 else:
     print('Invalid operator')
 
+
+# # To calculate Fibonacci Series up to n numbers.
+input_Number = int(input("Enter The Number: "))
+a, b, count = 0,1,0
+while count < input_Number:
+    print(a)
+    c = a+b
+    a = b
+    b = c
+    count +=1
+
+# # To find out whether the given String is Palindrome or not.
+input_String = input("Enter The String: ")
+string_Length = len(input_String)
+reversed_String = input_String[::-1]
+if input_String == reversed_String:
+    print('Palindrome')
+
+# # printinput_String # # To find Armstrong Number between two given number.
+input_Number = int(input("Enter the Number: "))
+temp, Arm_Strong,length = input_Number,0,len(str(input_Number))
+while temp > 0:
+    digit = temp % 10
+    temp = temp // 10
+    Arm_Strong += digit ** length
+if input_Number == Arm_Strong:
+    print("True")
