@@ -716,3 +716,604 @@ while l < len(arr) and r < len(arr):
         break
     l= l + 2
     r= r + 2
+# ---------------------------------------------------- Linked Lists
+# Singly Linked list--------------------------------------------------------------------------------------------------------------------
+class Node:
+	def __init__(self, data):
+		self.data = data
+		self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+    
+    def display(self):
+        array = []
+        currentNode = self.head
+        while currentNode is not None:
+            array.append(currentNode.data)
+            currentNode = currentNode.next
+        return array
+
+    def insertatend(self, data):
+        new_node = Node(data)
+        if self.head is None:
+            self.head = new_node
+            return
+        temp = self.head
+        while temp.next != None:
+            temp = temp.next
+        temp.next = new_node
+    
+    def insertatstart(self, data):
+        new_node = Node(data)
+        new_node.next = self.head
+        self.head = new_node    
+    
+    
+    def delete(self, data):
+		    if self.head == None:
+			    return
+		    if self.head.data == data:
+			    self.head = self.head.next
+			    return
+		    temp = self.head
+		    while temp != None:
+			    if temp.next.data == data:
+				    temp.next = temp.next.next
+				    return
+			    temp = temp.next        
+    
+    def deletefromStart(self):
+        self.head = self.head.next
+        return
+    
+    def deletefromEnd(self):
+        temp = self.head
+        while(temp.next.next !=None):
+            temp = temp.next
+        temp.next = None
+        return
+    
+    def deletefromParticular(self,index):
+        temp = self.head
+        counter = 1
+        while(counter < index-1):
+            temp = temp.next
+            counter +=1
+        temp.next = temp.next.next
+    
+    
+    def insertatparticular(self, data, index):
+        new_node = Node(data)    
+        if self.head == None:
+            self.head = new_node
+            return
+        temp = self.head
+        counter = 2
+        print(f"counter value before{counter}")
+        while counter < index:
+            temp = temp.next
+            counter += 1
+            print(f"counter value after{counter}")
+        new_node.next = temp.next
+        temp.next = new_node
+# two pointers
+    def reversal(self):
+        temp = self.head
+        prev = None
+        while(temp!=None):
+            link = temp.next
+            temp.next = prev
+            prev = temp
+            temp = link
+        self.head = prev
+        return self.head
+    
+    def removeduplicates(self):
+        if(self.head == None):
+            return
+        temp = self.head
+        setfor = set()
+        setfor.add(temp.data)
+        while(temp != None and temp.next!=None):
+            if(temp.data == temp.next.data):
+                temp.next = temp.next.next
+            else:
+                setfor.add(temp.next.data)
+                temp = temp.next
+        return setfor
+                
+# Doubly linked lists ------------------------------------------------------------------------------------------------------
+class nodeforDoublyLinkedlist:
+    def __init__(self,data):
+        self.data = data
+        self.next = None
+        self.prev = None
+        
+# class doublyLinkedlist:
+    def __init__(self):
+        self.head = None
+    
+    def display(self):
+        array = []
+        currentNode = self.head
+        while currentNode != None:
+            array.append(currentNode.data)
+            currentNode = currentNode.next
+        return array
+    
+    def insertatend(self, data):
+        new_node = nodeforDoublyLinkedlist(data)
+        if (self.head == None):
+            self.head = new_node
+            return
+        temp = self.head
+        while(temp.next!= None):
+            temp = temp.next
+        new_node.prev= temp
+        temp.next = new_node
+        new_node.next = None
+        return
+    
+    def insertatstart(self, data):
+        new_node = nodeforDoublyLinkedlist(data)
+        if (self.head == None):
+            self.head = new_node
+            return
+        temp = self.head
+        new_node.next = temp
+        new_node.prev = None
+        temp.prev = new_node
+        self.head = new_node
+        return
+
+    def insertatparticular(self, data, index):
+        new_node = nodeforDoublyLinkedlist(data)
+        if (self.head == None):
+            self.head = new_node
+            return
+        temp = self.head
+        counter = 1
+        while(counter < index):
+            temp = temp.next
+            counter +=1
+        new_node.next = temp.next
+        new_node.prev = temp
+        temp.next = new_node
+        temp.next.prev= new_node.next
+        return
+
+    def deletefordata(self, data):
+        temp = self.head
+        while(temp!= None):
+            if(temp.data == data):
+                if(temp.next == None):
+                    temp.prev.next = temp.next
+                    return
+                elif(temp.prev == None):
+                    self.head = temp.next
+                    self.head.prev = None
+                    return
+                else:
+                    temp.prev.next = temp.next
+                    temp.next.prev = temp.prev
+                    return
+            temp = temp.next
+        return
+    
+    def deletefromStart(self):
+        temp = self.head
+        self.head = self.head.next
+        self.head.prev = None
+        return
+    
+    def deletefromEnd(self):
+        temp = self.head
+        while(temp.next !=None):
+            temp = temp.next
+        temp.prev.next = None
+        return
+    
+    def deletefromParticular(self,index):
+        temp = self.head
+        counter = 0
+        while(temp!= None):
+                if(counter == index):
+                    if(temp.prev!=None):
+                        temp.prev.next = temp.next
+                    if(temp.next!=None):
+                        temp.next.prev = temp.prev
+                    if (temp.prev == None):
+                        self.head == temp.prev
+                    if (temp.next == None):
+                        temp.next = None
+                temp = temp.next
+                counter +=1
+        return
+    def reversal(self):        
+        return
+#-----------------------------------------------------------------------------------------
+# circular linked list
+class Node:
+	def __init__(self, data):
+		self.data = data
+		self.next = None
+
+class circularLinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+    
+    def display(self):
+        array = []
+        if self.head is None:
+            return array
+
+        currentNode = self.head
+        while True:
+            array.append(currentNode.data)
+            currentNode = currentNode.next
+            if currentNode == self.head:
+                break
+        return array
+    
+    def insertatend(self, data):
+        new_node = Node(data)
+        
+        if self.head is None:
+            self.head = new_node
+            self.tail = new_node
+            new_node.next = self.head
+            return
+        
+        self.tail.next = new_node
+        self.tail = new_node
+        self.tail.next = self.head
+
+# ------------------------------------------------------------------------------
+# cycle detection
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class LinkedListWithCycle:
+    def __init__(self):
+        self.head = None
+
+    # Insert nodes at the end of the list
+    def insert(self, data):
+        new_node = Node(data)
+        if self.head is None:
+            self.head = new_node
+        else:
+            temp = self.head
+            while temp.next is not None:
+                temp = temp.next
+            temp.next = new_node
+
+    # Method to create a cycle in the list
+    def create_cycle(self, pos):
+        if pos < 0:
+            return
+
+        cycle_node = None
+        temp = self.head
+        index = 0
+
+        while temp.next is not None:
+            if index == pos:
+                cycle_node = temp
+            temp = temp.next
+            index += 1
+        
+        if cycle_node:
+            temp.next = cycle_node  # Creating a cycle by linking the last node to the node at 'pos'
+
+    # Method to detect if there is a cycle in the list (Floyd's Cycle Detection Algorithm)
+    def detect_cycle(self):
+        slow_pointer = self.head
+        fast_pointer = self.head.next
+        
+        while(fast_pointer!= None and fast_pointer.next!= None):
+            slow_pointer = slow_pointer.next
+            fast_pointer = fast_pointer.next.next
+
+            if(slow_pointer == fast_pointer):
+                return True
+        return False
+
+    # Method to display the list (will only print up to 10 elements to avoid infinite loop in case of a cycle)
+    def display(self):
+        temp = self.head
+        count = 0
+        result = []
+        while temp is not None and count < 10:
+            result.append(temp.data)
+            temp = temp.next
+            count += 1
+
+        return result
+
+#----------------------------------------------------------------------------------------------------- 
+if __name__ == "__main__":
+    ll = LinkedList()
+    ll.insertatend(1)
+    ll.insertatend(2)
+    ll.insertatend(3)
+    ll.insertatend(2)
+    ll.insertatend(2)
+    ll.insertatend(2)
+    ll.insertatend(4)
+    ll.insertatend(5)
+    ll.insertatend(6)
+    ll.insertatend(7)
+    ll.insertatend(8)
+    print(ll.display())
+    ll.removeduplicates()
+    print(ll.display())
+    ll.deletefromStart()
+    print(ll.display())
+    ll.deletefromEnd()
+    print(ll.display())
+    ll.deletefromParticular(3)
+    print(ll.display())
+    print(ll.insertatparticular(5,4))
+    print(ll.display())
+    ll2 = LinkedList()
+    ll2.insertatstart(1)
+    ll2.insertatstart(2)
+    ll2.insertatstart(3)
+    ll2.delete(1)
+    print(ll2.display())
+    ll.reversal()
+    print(ll.display())
+# ---------------------------------------------------------------------
+    lld = doublyLinkedlist()
+    lld.insertatstart(3)
+    lld.insertatstart(4)
+    lld.insertatstart(5)
+    lld.insertatstart(6)
+    lld.insertatstart(7)
+    print(lld.display())
+    lld.insertatend(8)
+    print(lld.display())
+    lld.insertatparticular(3,2)
+    lld.deletefromStart()
+    print(lld.display())
+    lld.deletefromEnd()
+    lld.deletefordata(7)
+    print(lld.display())
+    lld.deletefromParticular(4)
+    print(lld.display())
+    lld.reversal()
+    print(lld.display())
+# -----------------------------------------------------------------------
+    cll = circularLinkedList()
+    cll.insertatend(1)
+    cll.insertatend(2)
+    cll.insertatend(3)
+    cll.insertatend(4)
+    cll.insertatend(5)
+    cll.insertatend(6)
+    cll.insertatend(7)
+    print(cll.display())
+# ------------------------------------------------------------------------
+# # # Input a year and find whether it is a leap year or not.
+year = int(input('input the year: '))
+if year % 400==0 or year % 4==0 and year % 100!=0:
+    print(f'{year} is a leap year')
+else:
+    print(f'{year} is not a leap year')
+#
+# # # Take two numbers and print the sum of both.
+num1 = int(input('input the number: '))
+num2 = int(input('input the number: '))
+print(f'Sum is {num1+num2}')
+#
+#
+# # #  Take a number as input and print the multiplication table for it.
+number= int(input('Enter the number: '))
+i = 1
+while i<=20:
+    print(f'{i}*{number}={i*number}')
+    i+=1
+
+# # #  Keep taking numbers as inputs till the user enters ‘x’, after that print sum of all.
+outnumbers=0
+number = input('Enter a number: ')
+while number !='x':
+    outnumbers += int(number)
+    number = input('Enter a number: ')
+print(outnumbers)
+
+# # # Take 2 numbers as inputs and find their HCF and LCM.
+number_one = int(input("Enter First Number"))
+number_second = int(input("Enter Second Number"))
+remainder = 1
+
+if number_one <= number_second:
+    number_one, number_second = number_second, number_one
+
+while number_second != 0:
+    remainder   =   number_one % number_second
+    print(f"{remainder} is the remainder")
+    number_one = number_second
+    number_second=remainder
+
+# # # Write a program to print whether a number is even or odd, also take input from the user.
+number_one = int(input("Enter a number: "))
+if number_one % 2 == 0:
+    print(number_one,"is even")
+else:
+    print(number_one,"is odd")
+
+# # # Take name as input and print a greeting message for that particular name.
+name = input("Input your name: ")
+if name != '':
+    print(f"Hi how are you {name} !")
+
+# # # Write a program to input principal, time, and rate (P, T, R) from the user and find Simple Interest.
+principle, time, rate = map(int, input("Kindly Enter your Inputs: ").split())
+simpleInterest = principle*time*rate / 100
+print(simpleInterest)
+
+# # # Take 2 numbers as input and print the largest number.
+one, second = map(int, input("Enter the Numbers").split(','))
+if one >second:
+    print(f'{one} > {second}')
+else:
+    print(f'{second} > {one}')
+
+# # # Input currency in rupees and output in USD.
+pkr = float(input("Enter the Amount in pkr: "))
+exchangerate = 281
+print(f"{pkr:.2f} pkr is equal to {pkr/exchangerate:.2f} usd")
+
+# # # Take in two numbers and an operator (+, -, *, /) and calculate the value. (Use if conditions)
+first_Number, second_Number = map(int, input("Enter Numbers: ").split(','))
+operator = input('Enter the operator: ')
+if operator == '+':
+    print(f"{first_Number + second_Number}")
+elif operator == '-':
+    print(f"{first_Number - second_Number}")
+elif operator == '*':
+    print(f"{first_Number * second_Number}")
+elif operator == '/':
+    print(f"{first_Number / second_Number}")
+else:
+    print('Invalid operator')
+
+
+# # To calculate Fibonacci Series up to n numbers.
+input_Number = int(input("Enter The Number: "))
+a, b, count = 0,1,0
+while count < input_Number:
+    print(a)
+    c = a+b
+    a = b
+    b = c
+    count +=1
+
+# # To find out whether the given String is Palindrome or not.
+input_String = input("Enter The String: ")
+string_Length = len(input_String)
+reversed_String = input_String[::-1]
+if input_String == reversed_String:
+    print('Palindrome')
+
+# # printinput_String # # To find Armstrong Number between two given number.
+input_Number = int(input("Enter the Number: "))
+temp, Arm_Strong,length = input_Number,0,len(str(input_Number))
+while temp > 0:
+    digit = temp % 10
+    temp = temp // 10
+    Arm_Strong += digit ** length
+if input_Number == Arm_Strong:
+    print("True")
+# -------------------------------------------------
+class Node:
+    def __init__(self,data):
+        self.data = data
+        self.left = None
+        self.right = None
+        
+class BinarySearchTree:
+    def __init__(self):
+        self.root = None
+    
+    def insert(self, data):
+        new_node = Node(data)
+        if (self.root == None):
+            self.root = new_node
+            return
+        current_node = self.root
+        while (True):
+            if(new_node.data < current_node.data):
+                if(current_node.left == None):
+                    current_node.left = new_node
+                    break
+                current_node = current_node.left
+            elif(new_node.data > current_node.data):
+                if(current_node.right == None):
+                    current_node.right = new_node
+                    break
+                current_node = current_node.right
+                        
+                
+# breadth first search(queue)
+    def breadthfirstsearch(self):
+        if(self.root == None):
+            return []
+
+        queue = [self.root]
+        result = []
+
+        while(len(queue) > 0):
+            current_node = queue.pop(0)
+            result.append(current_node.data)
+
+            if(current_node.left != None):
+                queue.append(current_node.left)
+            if(current_node.right != None):
+                queue.append(current_node.right)
+
+        return result
+
+ 
+    def depthfirstsearch(self):
+        current_node = self.root
+        stack = []
+        result = []
+        while True:
+            if(current_node!= None):
+                stack.append(current_node)
+                current_node = current_node.left
+            elif(len(stack)>0):
+                current_node = stack.pop()
+                result.append(current_node.data)
+                current_node = current_node.right
+            else:
+                break
+        return result
+        
+    def insertbinary(self, data):
+        new_node = Node(data)
+        if self.root is None:
+            self.root = new_node
+            return
+        
+        queue = [self.root]
+        
+        while queue:
+            current_node = queue.pop(0)
+            
+            # Insert in left child if available
+            if current_node.left is None:
+                current_node.left = new_node
+                return
+            else:
+                queue.append(current_node.left)
+            
+            # Insert in right child if available
+            if current_node.right is None:
+                current_node.right = new_node
+                return
+            else:
+                queue.append(current_node.right)
+bst = BinarySearchTree()
+bst.insert(10)
+bst.insert(5)
+bst.insert(15)
+bst.insert(3)
+bst.insert(7)
+bst.insert(12)
+bst.insert(18)
+
+# BFS (Level Order Traversal)
+print("BFS:", bst.breadthfirstsearch())  # Output: [10, 5, 15, 3, 7, 12, 18]
+
+# DFS Inorder Traversal
+print("DFS Inorder:", bst.depthfirstsearch())  # Output: [3, 5, 7, 10, 12, 15, 18]
+        
